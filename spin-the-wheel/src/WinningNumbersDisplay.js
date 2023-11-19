@@ -1,14 +1,16 @@
 import React from "react";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
 
 function WinningNumbersDisplay({ winningNumbers }) {
   return (
-    <div>
+    <div style={{ marginTop: "20px" }}>
       <h3>Winning Numbers:</h3>
-      <ul>
+      <List>
         {winningNumbers.map((num, index) => (
-          <li key={index}>{num}</li>
+          <ListItem key={index}>{num}</ListItem>
         ))}
-      </ul>
+      </List>
     </div>
   );
 }
