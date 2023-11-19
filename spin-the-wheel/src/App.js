@@ -1,7 +1,30 @@
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 import React, { useState } from "react";
 import Wheel from "./Wheel";
 import NumberInput from "./NumberInput";
 import WinningNumbersDisplay from "./WinningNumbersDisplay";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#673ab7", // A shade of purple
+      light: "#9a67ea", // Lighter shade of purple
+      dark: "#320b86", // Darker shade of purple
+      contrastText: "#fff", // Text color for contrast
+    },
+    secondary: {
+      main: "#ffd700", // Gold color
+      light: "#ffdb1c", // Lighter shade of gold
+      dark: "#b29500", // Darker shade of gold
+      contrastText: "#000", // Text color for contrast
+    },
+    // ... other palette options like error, warning, etc.
+  },
+  typography: {
+    // ... your typography settings
+  },
+  // ... other theme customizations
+});
 
 function App() {
   const [numbers, setNumbers] = useState([]);
@@ -24,11 +47,13 @@ function App() {
   };
 
   return (
-    <div>
-      <NumberInput onAddNumber={addNumber} />
-      <Wheel numbers={numbers} onSpin={spin} />
-      <WinningNumbersDisplay winningNumbers={winningNumbers} />
-    </div>
+    <ThemeProvider theme={theme}>
+      <div>
+        <NumberInput onAddNumber={addNumber} />
+        <Wheel numbers={numbers} onSpin={spin} />
+        <WinningNumbersDisplay winningNumbers={winningNumbers} />
+      </div>
+    </ThemeProvider>
   );
 }
 
