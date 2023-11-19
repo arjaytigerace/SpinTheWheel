@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
 
 function NumberInput({ onAddNumber }) {
   const [input, setInput] = useState("");
@@ -27,14 +29,19 @@ function NumberInput({ onAddNumber }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
+    <form onSubmit={handleSubmit} style={{ margin: "20px 0" }}>
+      <TextField
+        label="Enter numbers"
+        variant="outlined"
         type="text"
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        placeholder="Enter numbers (e.g., 1-9, 1,2,3)"
+        placeholder="e.g., 1-9, 1,2,3"
+        style={{ marginRight: "10px" }}
       />
-      <button type="submit">Add Numbers</button>
+      <Button variant="contained" color="primary" type="submit">
+        Add Numbers
+      </Button>
     </form>
   );
 }
