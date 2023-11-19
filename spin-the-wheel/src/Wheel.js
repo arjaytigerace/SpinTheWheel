@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 
 function Wheel({ numbers, onSpin }) {
   return (
     <div>
       <button onClick={onSpin}>Spin</button>
-      {/* Visualization of the wheel will go here */}
+      <ul>
+        {numbers.map((num, index) => (
+          <li key={index}>{num}</li>
+        ))}
+      </ul>
     </div>
   );
 }

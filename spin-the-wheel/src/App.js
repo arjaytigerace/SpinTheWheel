@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Wheel from "./Wheel";
+import NumberInput from "./NumberInput";
+import WinningNumbersDisplay from "./WinningNumbersDisplay";
 
 function App() {
+  const [numbers, setNumbers] = useState([]);
+  const [winningNumbers, setWinningNumbers] = useState([]);
+
+  const addNumber = (numbersToAdd) => {
+    const newNumbers = numbersToAdd.filter(
+      (num) => !numbers.includes(num) && parseInt(num, 10) <= 100
+    );
+    setNumbers([...numbers, ...newNumbers]);
+  };
+
+  const spin = () => {
+    if (numbers.length > 0) {
+      const index = Math.floor(Math.random() * numbers.length);
+      const winningNumber = numbers[index];
+      setWinningNumbers([...winningNumbers, winningNumber]);
+      setNumbers(numbers.filter((n) => n !== winningNumber));
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <NumberInput onAddNumber={addNumber} />
+      <Wheel numbers={numbers} onSpin={spin} />
+      <WinningNumbersDisplay winningNumbers={winningNumbers} />
     </div>
   );
 }
